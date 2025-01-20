@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <%- include('partials/header1.ejs') %>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="/public/addcard.js" defer></script>
+        <script src="/public/script.js" defer> </script>
+        
+</head>
+<style>
+    body {
+        background-color: rgb(88, 88, 119);
+    }
+
+    h2 {
+
+        color: orange;
+        font-weight: bold;
+        font-size: 36px;
+    }
+</style>
+
+<body>
+    <%- include('partials/navbar1.ejs') %>
+    <div class="bar">
+        <form id="input-form">
+            <input type="text" placeholder="SampleGeneration" id="cardinput">
+            <button type="submit">Add</button>
+        </form>
+    </div>
+
+        <div class="lanes" id="lane-container">
+            <script src="/public/drag.js" defer></script>
+            
+            <div class="swim-lane" id="cardin">
+                <p class="task" draggable="true">Test</p>
+            </div>
+            
+            
+            
+        </div>
+        
+</body>
+
+
+</html>

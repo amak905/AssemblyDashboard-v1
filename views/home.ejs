@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <%- include('partials/header1.ejs') %>
+    <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<style>
+    body {
+        background-color: rgb(88, 88, 119);
+    }
+
+    h2 {
+
+        color: orange;
+        font-weight: bold;
+        font-size: 36px;
+    }
+</style>
+
+<body>
+    <%- include('partials/navbar1.ejs') %>
+
+        <div class="text-center margin-auto">
+            <h2> Assembly Dashboard Login </h2>
+           
+            
+            <div class="text-center">
+                
+                <form>
+                    <div class="form-group" id="sign-in">
+
+                        <!-- Email input -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <input type="email" id="email-id" class="form-control"/>
+                            <label class="form-label" for="email-id">User ID</label>
+                        </div>
+
+                        <!-- Password input -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <input type="password" id="pass" class="form-control" />
+                            <label class="form-label" for="pass">Password</label>
+                        </div>
+
+                        <!-- Submit button -->
+                    <a href="/boardview">
+                        <button type="button" data-mdb-button-init data-mdb-ripple-init
+                            class="btn btn-primary btn-block mb-4">
+                            Sign in
+                        </button>
+                    </a>
+
+                        <!-- Register buttons -->
+
+                    </div>
+                </form>
+            </div>
+            <div class="box">
+                <img src="/public/images/oasis.jpg" alt="Oasis Elaflex Logo">
+            </div>
+        </div>
+        
+
+
+</body>
+
+</html>

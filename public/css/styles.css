@@ -1,0 +1,87 @@
+p { 
+    color:black;
+}
+h1{color: red}
+h2{color: green}
+h4{color:purple;}
+
+
+.box img{
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    
+    border-radius: 5px;
+    border-color:black;
+    max-width: 400px;
+    aspect-ratio: 1;
+    object-fit: fill;
+    box-shadow: 0px 4px 8px 0px rgb(70, 70, 70), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+#sign-in {
+    display: inline-block;
+    padding: 40px;
+    border-radius: 5px;
+    top:50%;
+    left:50%;
+    background: rgb(34, 32, 150);
+    width: 400px;
+    margin-top: 40px;
+    color:aliceblue;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0,0,0.19) ;
+
+}
+#pass{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    font-style:italic;
+}
+
+
+.lanes{
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    gap: 16px;
+    padding: 24px 36px;
+    overflow:scroll;
+    height: 100;
+}
+
+.heading{
+    font-size:22px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.swim-lane{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    background-color: rgb(138, 138, 179);
+    box-shadow: 0px 5px 15px black;
+    border-radius: 4px;
+    width: 225px; 
+    min-height: 120px;
+    flex-shrink: 0px;
+}
+
+.task{
+    background: whitesmoke;
+    color:black;
+    box-shadow: 0px 5px 15px black;
+    padding:12px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: move;
+}
+
+.is-dragging{
+    scale: 1.05; 
+    box-shadow: 0px 5px 15px black; 
+    border-radius: 4px;
+    background: rgb(50,50,50);
+    color:white; 
+}
