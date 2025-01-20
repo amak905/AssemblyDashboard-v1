@@ -5,7 +5,8 @@ var conn = require('./dbConfig');
 app.set('view engine', 'ejs');
 
 app.use(session({
-    secret:'bananabreak', 
+    //security stuff - secret is the session key and should be secure. Read more about it. 
+    secret:'bananabreak',
     resave: true,
     saveUninitialized: true
 }));
