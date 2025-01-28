@@ -13,6 +13,18 @@ app.use(session({
 
 app.use('/public', express.static('public'));
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+app.get('/boardview', function(req,res,next){
+    if(req.session.loggedin){
+        res.render('boardview');
+    }
+    else {
+        res.send('Please login to view this page!');
+    }
+});
+
 app.get('/', function (req, res) {
     res.render("home");
 });
@@ -27,6 +39,41 @@ app.get('/beaches',function(req,res){
 app.get('/boardview',function(req,res){
     res.render("boardview");
 });
+
+app.get('/login',function(req,res){
+    res.render('login.ejs');
+});
+
+app.get('/logout',(req,res)=>{
+    req.session.destroy();
+    res.redirect('/home');
+})
+
+app.post('/auth', function(req,res){
+    let name = req.body.username;
+    let password = req.body.password;
+    if(name && password) {
+        conn.query('SELECT * FROM users WHERE user = ? AND password = ?', [name, password],
+            function(error, results, fields){
+                if(error) throw error;
+                if(results.length>0) {
+                    req.session.loggedin = true; 
+                    req.session.username = name;
+                    res.redirect('/boardview');
+                }
+                else {
+                    res.send('Incorrect Username or password');
+                }
+                res.end();
+            }
+        );
+    }
+    else{
+        res.send('Please enter username and password');
+        res.end();
+    }
+});
+
 
 app.listen(3000);
 console.log('Node app is running on port 3000');

@@ -16,6 +16,7 @@ if (call == false) {
 
         const lanecontainer = document.getElementById('lane-container');
         i = 0;
+        
         shipDate.forEach(function (sDate) {
             const swimLane = document.createElement('div');
             swimLane.classList.add("swim-lane");
