@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <%- include('partials/header1.ejs') %>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<style>
+    body {
+        background-color: rgb(88, 88, 119);
+    }
+
+    h2 {
+
+        color: orange;
+        font-weight: bold;
+        font-size: 36px;
+    }
+</style>
+
+<body>
+    <%- include('partials/navbar1.ejs') %>
+
+        <div class="text-center margin-auto">
+            <h2> Assembly Dashboard Registration </h2>
+
+
+            <div class="text-center">
+
+                <form action="/reg" method="post">
+                    <div class="form-group" id="sign-in">
+
+                        <!-- Email input -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <input type="user" name="username" id="username" class="form-control"  placeholder="Username" required/>
+                            <label class="form-label" for="email-id">Enter Desired Username</label>
+                        </div>
+                        
+
+                        <!-- Password input -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <input type="password" name="password" id="password" class="form-control" required/>
+                            <label class="form-label" for="pass">Enter your desired password</label>
+                        </div>
+
+                        <!-- Submit button -->
+                    
+                        <input type="submit" value="Register" data-mdb-button-init data-mdb-ripple-init
+                            class="btn btn-primary btn-block mb-4">
+                         <!--   Sign in
+                        </button> -->
+
+                    </div>
+                </form>
+                
+
+                <br>
+                
+            </div>
+
+            <div class="box">
+                <img src="/public/images/oasis.jpg" alt="Oasis Elaflex Logo">
+            </div>
+        </div>
+        
+
+
+</body>
+
+</html>

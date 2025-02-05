@@ -11,4 +11,12 @@ conn.connect(function(err){
     console.log('Database Connected');
 });
 
+/* conn.query('SELECT * FROM asmjob',(err,rows,fields)=>{
+    if (err) throw err
+    console.log('The asm jobs are:', rows)
+
+}
+
+) */
+
 module.exports = conn;

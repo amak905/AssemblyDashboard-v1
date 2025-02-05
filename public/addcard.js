@@ -3,6 +3,7 @@ const form = document.getElementById("input-form");
 const input = document.getElementById("cardinput");
 const inLane = document.getElementById("cardin");
 
+
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
     const value = input.value;
