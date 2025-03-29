@@ -1,6 +1,21 @@
 const draggables = document.querySelectorAll(".task");
 const droppables = document.querySelectorAll(".swim-lane");
 
+document.addEventListener("DOMContentLoaded",function(){
+const dropzone = document.getElementById("delete");
+
+dropzone.addEventListener('drop',(e) =>{
+    e.preventDefault();
+        const curTask = document.querySelector(".is-dragging");
+
+        if(curTask){
+            curTask.remove();
+        }
+});
+
+});
+
+
 draggables.forEach((task)=>{
     task.addEventListener("dragstart", ()=>{
         task.classList.add("is-dragging");
@@ -10,12 +25,16 @@ draggables.forEach((task)=>{
     });
 });
 
+
+
 droppables.forEach((zone)=>{
     zone.addEventListener("dragover",(e)=>{
         e.preventDefault();
 
         const bottomTask = insertAboveTask(zone, e.clientY);
         const curTask = document.querySelector(".is-dragging");
+
+        console.log(zone.id);
 
         if(!bottomTask) {
             zone.appendChild(curTask);
@@ -46,3 +65,19 @@ const insertAboveTask = (zone,mouseY) => {
 
     return closestTask;
 };
+
+
+
+/* dropzone.forEach((zone)=>{
+    zone.addEventListener("drop",(e)=>{
+        e.preventDefault();
+        const itemId = e.dataTransfer.getData('text/plain');
+        console.log(itemId);
+        const item = document.getElementById(itemId);
+        if(item){
+            item.remove();
+        }
+})
+}); */
+
+

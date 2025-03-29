@@ -1,0 +1,157 @@
+<html>
+
+<head>
+    <%- include('partials/header1.ejs') %>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<title>Assembly Order Form</title>
+<style>
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+        text-align: left;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #218838;
+    }
+
+    h2 {
+        text-align: center;
+    }
+    #message {
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+            display: none;
+        }
+</style>
+</head>
+
+<body>
+    <%- include('partials/navbar-logout.ejs') %>
+
+        <div class="text-center margin-auto">
+            <h2> Assembly Dashboard Login </h2>
+
+
+            <div class="text-center">
+
+               
+                    <div class="form-group" id="sign-in">
+                        <form id="assemblyForm">
+                        <h2>Assembly Order Form</h2>
+                        <label for="assemblyOrder">Assembly Order (5-digit number):</label>
+                        <input type="text" id="assemblyOrder" name="assemblyOrder" pattern="\d{5}" required>
+
+                        <label for="shipDate">Ship Date:</label>
+                        <input type="date" id="shipDate" name="shipDate" required>
+
+                        <label for="partNumber">Part Number:</label>
+                        <input type="text" id="partNumber" name="partNumber" required>
+
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" required>
+
+                        <label for="assemblyTime">Assembly Time (decimal, 1 place):</label>
+                        <input type="number" id="assemblyTime" name="assemblyTime" step="0.1" required>
+
+                        <label for="bench">Bench:</label>
+                        <select id="bench" name="bench">
+                            <option value="Bench 1">Bench 1</option>
+                            <option value="Bench 2">Bench 2</option>
+                            <option value="Bench 3">Bench 3</option>
+                        </select>
+
+                        <button type="submit">Submit</button>
+                </form>
+                <p id="message">Form submitted successfully!</p>
+            </div>
+
+
+            <br>
+
+        </div>
+
+        <div class="box">
+            <img src="/public/images/oasis.jpg" alt="Oasis Elaflex Logo">
+        </div>
+        </div>
+
+        
+
+        <script>
+            document.getElementById('assemblyForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const formData = new FormData(this);
+                console.log("FormData:",formData);
+                fetch('/submit', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message === 'Form submitted successfully') {
+                            document.getElementById('message').style.display = 'block';
+                            this.reset(); // Reset form after submission
+                        } else {
+                            alert('Error submitting form.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error submitting form.');
+                    });
+                });
+
+                function getQueryParam(param) {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    return urlParams.get(param);
+                }
+
+                document.getElementById("assemblyOrder").value=getQueryParam("assemblyOrder");
+              
+                document.getElementById("partNumber").value=getQueryParam("partNumber");
+                document.getElementById("quantity").value=getQueryParam("qty");
+                document.getElementById("assemblyTime").value=getQueryParam("asmtime");
+
+                const encodedDate = getQueryParam("shipDate");
+                if(encodedDate){
+                    const decodedDate = decodeURIComponent(encodedDate);
+                    const dateObj = new Date(decodedDate);
+                    const formattedDate = dateObj.toLocaleDateString('en-CA');
+                    //const formattedDate = dateObj.toISOString().split('T')[0];
+                    document.getElementById("shipDate").value=formattedDate;
+                }
+        </script>
+
+
+</body>
+
+</html>
+
+</html>

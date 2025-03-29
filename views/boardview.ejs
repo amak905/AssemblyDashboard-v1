@@ -7,8 +7,11 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="/public/addcard.js" defer></script>
+        <!-- <script src="/public/addcard.js" defer></script>
+         -->
         <script src="/public/script.js" defer> </script>
+        <script src="/public/datafetch.js" defer></script>
+        
 
 </head>
 <style>
@@ -22,21 +25,52 @@
         font-weight: bold;
         font-size: 36px;
     }
+
+    .submit {
+        position:absolute;
+        top: 10px;
+        right: 0.9vw;
+        padding: 0.2vh 0.5vw; 
+        font-size: 1vw;
+        cursor: pointer;
+        border-radius: 5px; 
+        border: 2px; 
+        
+        font-weight: bold;
+
+    }
+
+    .viewcomplete {
+        position:absolute;
+        top: 10px;
+        right: 15vw;
+        padding: 0.2vh 0.5vw; 
+        font-size: 1vw;
+        cursor: pointer;
+        border-radius: 5px; 
+        border: 2px; 
+        
+        font-weight: bold;
+    }
 </style>
 
 <body>
     <%- include('partials/navbar-logout.ejs') %>
-        <div class="bar">
+    <script src="/public/datafetch.js"></script>
+        <!-- <div class="bar">
             <form id="input-form">
                 <input type="text" placeholder="SampleGeneration" id="cardinput">
                 <button type="submit">Add</button>
             </form>
-        </div>
+        </div> -->
 
         <div class="lanes" id="lane-container">
+            
             <script src="/public/drag.js" defer></script>
             
-            <div class="swim-lane" id="cardin">
+
+            
+            <!-- <div class="swim-lane" id="cardin">
                 <div class="task" draggable="true">
                     <div class="grid">
                         <div class="ao">
@@ -56,18 +90,60 @@
                             <h1 class="task__ao">3.5h</h1>
                         </div>
                         
-                        <div class="part avail"></div>
+                        <div class="benchlist"></div>
                         <div class="type">
                             <h1 class="task__type">LOCTITE</h1>
                         </div>
                     </div>
                 </div>
 
+            </div> -->
+
+            <div>
+                <button class="submit" onclick="completeJobs()">Submit Completed Jobs</button>
+            </div>
+            <div>
+                <button class="viewcomplete" onclick="viewcompleted()">View Completed Jobs</button>
             </div>
 
-
         </div>
+        <script>
+            function completeJobs(){
+                alert("Jobs Submitted");
 
+                const moveComplete = document.querySelectorAll("#complete > div")
+                console.log(moveComplete);
+
+                let jobs = Array.from(moveComplete).map(el=>el.id);
+                console.log("Jobs:", jobs);
+                fetch('/send-jobs',{
+                    method:'POST',
+                    headers:{'Content-Type': 'application/json'},
+                    body: JSON.stringify({jobs})
+                })
+
+                .then(response => response.json())
+/*                 .then(result =>{
+                    alert(result.message);
+                }) */
+                
+                const completed = document.querySelectorAll("#complete *");
+                console.log(completed);
+                completed.forEach(complete=>{
+                if(complete.id !== "completezone"){
+                complete.remove();
+                }
+            });
+        }
+
+        function viewcompleted(){
+            let script = document.createElement("script");
+            script.src = "/public/datafetch-complete.js";
+            document.body.appendChild(script);
+            const incomplete = document.querySelectorAll("#cardin *");
+        }
+
+        </script>
 </body>
 
 

@@ -1,16 +1,14 @@
 let call = false;
-
+let buffer = 5;
 if (call == false) {
     document.addEventListener('DOMContentLoaded', function () {
         const shipDate = [];
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < buffer; i++) {
             d = new Date();
-            d.setDate(d.getDate() + i);
-            day = d.getDate();
-            month = d.getMonth() + 1;
             variable = "day" + i;
             console.log(variable);
-            shipDate[i] = day + '/' + month;
+            d.setDate(d.getDate()+i);
+            shipDate[i] = (d.getDate()) + '/' + (d.getMonth()+1) + '/' + (d.getFullYear().toString().substr(-2));
             console.log(shipDate[i]);
         }
 
@@ -20,7 +18,7 @@ if (call == false) {
         shipDate.forEach(function (sDate) {
             const swimLane = document.createElement('div');
             swimLane.classList.add("swim-lane");
-            swimLane.id = `day${i}`
+            swimLane.id = shipDate[buffer-(i+1)];
             swimLane.addEventListener("dragover", (e) => {
                 e.preventDefault();
 
@@ -37,17 +35,35 @@ if (call == false) {
             console.log(swimLane.id);
 
             const dateHead = document.createElement('h3');
-            dateHead.textContent = `${shipDate[i]}`
+            dateHead.textContent = `${shipDate[buffer-i-1]}`
             dateHead.className = "heading";
             swimLane.appendChild(dateHead);
             i++;
             console.log(i);
             lanecontainer.appendChild(swimLane);
 
-            if (i == 5) {
+            if (i == buffer) {
+                addlane(lanecontainer,"late","URGENT","heading");
+                addlane(lanecontainer,"complete","Complete","completezone","complete");
+                addlane(lanecontainer,"delete","Delete","dropzone");
+                
+            }
+
+        })
+
+
+
+        call = true;
+
+    }, false)
+
+}
+
+
+function addlane(lane,identification,laneheader, headerid){
                 const swimLane = document.createElement('div');
                 swimLane.className = 'swim-lane';
-                swimLane.id = "late";
+                swimLane.id = identification;
                 swimLane.addEventListener("dragover", (e) => {
                     e.preventDefault();
     
@@ -61,19 +77,10 @@ if (call == false) {
                         swimLane.insertBefore(curTask, bottomTask);
                     }
                 })
-                const dateHead = document.createElement('h3');
-                dateHead.textContent = "URGENT";
-                dateHead.className = "heading";
-                swimLane.appendChild(dateHead);
-                lanecontainer.appendChild(swimLane);
-            }
-
-        })
-
-
-
-        call = true;
-
-    }, false)
+                const urgentHead = document.createElement('h3');
+                urgentHead.textContent = laneheader;
+                urgentHead.className = "heading";
+                urgentHead.id = headerid;
+                swimLane.appendChild(urgentHead);
+                lane.appendChild(swimLane);
 }
-
